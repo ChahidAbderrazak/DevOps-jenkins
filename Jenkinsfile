@@ -1,8 +1,6 @@
 pipeline {
     agent { 
-        node {
-            label 'cpu'
-            }
+        docker { image 'python:3.8-buster' }
       }
 
     triggers {
@@ -14,7 +12,7 @@ pipeline {
                 echo "Building.."
                 sh '''
                 cd myapp
-                pip3 install -r requirements.txt
+                python -m pip install -r requirements.txt
                 '''
             }
         }
