@@ -12,8 +12,9 @@ pipeline {
                 cd myapp
                 python3 --version
                 pip3 --version
-                pip3 install pytest 
-                pip3 install -r requirements.txt
+                python3 -m venv ./env
+                ./env/bin/pip install pytest 
+                ./env/bin/pip install -r requirements.txt
                 '''
             }
         }
