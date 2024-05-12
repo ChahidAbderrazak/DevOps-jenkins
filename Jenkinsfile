@@ -11,8 +11,8 @@ pipeline {
             steps {
                 echo "Building.."
                 sh '''
+                apt install python3 -y
                 python3 --version
-                pip3 install -U pytest
                 cd myapp
                 pip install -r requirements.txt
                 '''
