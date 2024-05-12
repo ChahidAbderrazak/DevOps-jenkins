@@ -10,6 +10,8 @@ pipeline {
                 echo "Building.."
                 sh '''
                 cd myapp
+                python3 --version
+                pip3 --version
                 pip3 install pytest 
                 pip3 install -r requirements.txt
                 '''
