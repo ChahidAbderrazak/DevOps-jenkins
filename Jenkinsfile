@@ -1,17 +1,18 @@
 pipeline {
+    agent { 
+        node {
+            label 'cpu'
+            }
+      }
 
-    agent  any 
-    
     triggers {
         pollSCM '* * * * *'
     }
-
     stages {
         stage('Build') {
             steps {
                 echo "Building.."
                 sh '''
-                python3 --version
                 cd myapp
                 pip install -r requirements.txt
                 '''
