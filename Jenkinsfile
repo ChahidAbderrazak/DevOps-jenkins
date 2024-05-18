@@ -17,7 +17,6 @@ pipeline {
                 ls 
                 source venv/bin/
                 pip install -r requirements.txt'
-                
                 '''
             }
         }
