@@ -27,15 +27,15 @@ pipeline {
                 // # create conda env
                 // conda init bash
                 // conda env create -f envs/myenv.yaml
-                
+
                 '''
             }
         }
         stage('Test downloading') {
             steps {
                 sh '''#!/usr/bin/env bash
-                source $WORKSPACE/miniconda/etc/profile.d/conda.sh
-                conda activate miniconda/envs/myenv/
+                // source $WORKSPACE/miniconda/etc/profile.d/conda.sh
+                // conda activate miniconda/envs/myenv/
                 snakemake -s workflows/download_fastq/Snakefile --directory workflows/download_fastq -n -j 48 --quiet
                 '''
             }
