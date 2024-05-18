@@ -1,43 +1,37 @@
-#!groovy
-
 pipeline {
-    agent any
-
-    environment {
-        PATH = "$WORKSPACE/miniconda/bin:$PATH"
+    agent { 
+        node {
+            label 'docker-agent-python'
+        }
     }
-
+    triggers {
+        pollSCM '* * * * *'
+    }
     stages {
-        stage('setup miniconda') {
+        stage('Build') {
             steps {
-                sh '''#!/usr/bin/env bash
-                echo "setup"
-                // apt install wget
-                // wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
-                // bash miniconda.sh -b -p $WORKSPACE/miniconda
-                // hash -r
-                // conda config --set always_yes yes --set changeps1 no
-                // conda update -q conda
-
-                // # Useful for debugging any issues with conda
-                // conda info -a
-                // conda config --add channels defaults
-                // conda config --add channels conda-forge
-                // conda config --add channels bioconda
-
-                // # create conda env
-                // conda init bash
-                // conda env create -f envs/myenv.yaml
-
+                echo "Building.."
+                sh '''
+                cd myapp
+                pip install -r requirements.txt
                 '''
             }
         }
-        stage('Test downloading') {
+        stage('Test') {
             steps {
-                sh '''#!/usr/bin/env bash
-                // source $WORKSPACE/miniconda/etc/profile.d/conda.sh
-                // conda activate miniconda/envs/myenv/
-                snakemake -s workflows/download_fastq/Snakefile --directory workflows/download_fastq -n -j 48 --quiet
+                echo "Testing.."
+                sh '''
+                cd myapp
+                python3 hello.py
+                python3 hello.py --name=Brad
+                '''
+            }
+        }
+        stage('Deliver') {
+            steps {
+                echo 'Deliver....'
+                sh '''
+                echo "doing delivery stuff.."
                 '''
             }
         }
