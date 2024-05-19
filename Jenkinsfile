@@ -15,7 +15,6 @@ pipeline {
                 cd myapp
                 python3 -m venv ./venv
                 ./venv/bin/pip install -r requirements.txt
-                pip3 install -r requirements.txt
                 '''
             }
         }
@@ -25,8 +24,7 @@ pipeline {
                 sh '''
                 cd myapp
                 ./venv/bin/python hello.py
-                #python3 hello.py
-                #python3 hello.py --name=Brad
+                ./venv/bin/python hello.py --name=Brad
                 '''
             }
         }
