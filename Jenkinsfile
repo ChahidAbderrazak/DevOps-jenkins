@@ -13,7 +13,9 @@ pipeline {
                 echo 'Building..'
                 sh '''
                 cd myapp
-                pip install -r requirements.txt
+                python3 -m venv ./venv
+                ./venv/bin/pip install -r requirements.txt
+                pip3 install -r requirements.txt
                 '''
             }
         }
@@ -22,8 +24,9 @@ pipeline {
                 echo 'Testing..'
                 sh '''
                 cd myapp
-                python3 hello.py
-                python3 hello.py --name=Brad
+                ./venv/bin/python hello.py
+                #python3 hello.py
+                #python3 hello.py --name=Brad
                 '''
             }
         }

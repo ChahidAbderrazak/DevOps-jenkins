@@ -1,7 +1,7 @@
 #/bin/bash
 docker system prune
 clear
-echo "[Docker] Running the Jenkins container"
+echo  && echo "[Docker] Running the Jenkins container"
 docker network create jenkins
 docker run --name jenkins-blueocean --restart=on-failure --detach \
   --network jenkins --env DOCKER_HOST=tcp://docker:2376 \
