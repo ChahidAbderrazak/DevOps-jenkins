@@ -4,12 +4,19 @@ pipeline {
             label 'cpu'
         }
     }
+
     triggers {
         pollSCM '* * * * *'
     }
+
     stages {
+        // stage('Checkout') {
+        //     steps {
+        //         git branch: 'main', changelog: false, poll: false, url: 'https://github.com/akarsh/selenium-webdriver-cucumber-js-example-project.git'
+        //     }
+        // }
         stage('Build') {
-            steps {
+            steps { s
                 echo 'Building..'
                 sh '''
                 cd myapp
@@ -18,6 +25,7 @@ pipeline {
                 '''
             }
         }
+
         stage('Test') {
             steps {
                 echo 'Testing..'
@@ -28,6 +36,7 @@ pipeline {
                 '''
             }
         }
+
         stage('Deliver') {
             steps {
                 echo 'Deliver....'
