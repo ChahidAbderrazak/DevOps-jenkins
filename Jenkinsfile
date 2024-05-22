@@ -12,12 +12,15 @@ pipeline {
     stages {
         // stage('Checkout') {
         //     steps {
-        //         git branch: 'main', changelog: false, poll: false, url: 'https://github.com/akarsh/selenium-webdriver-cucumber-js-example-project.git'
+        //         git branch: 'main', changelog: false, poll: false, \
+        // url: 'https://github.com/akarsh/selenium-webdriver-cucumber-js-example-project.git'
         //     }
         // }
+
         stage('Build') {
-            steps { s
+            steps {
                 echo 'Building..'
+                echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
                 sh '''
                 cd myapp
                 python3 -m venv ./venv

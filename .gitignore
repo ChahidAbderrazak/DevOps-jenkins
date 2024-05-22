@@ -1,2 +1,4 @@
 
 cache/**
+jenkins-data/**
+jenkins-docker-certs/**
