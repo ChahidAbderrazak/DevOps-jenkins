@@ -1,10 +1,5 @@
 pipeline {
-    agent {
-        node {
-            label 'cpu'
-        }
-    }
-
+    agent any
     triggers {
         pollSCM '* * * * *'
     }
