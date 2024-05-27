@@ -1,5 +1,11 @@
 pipeline {
-    agent any
+    // agent any
+    agent {
+        docker {
+            image 'python:3.8'
+        }
+    }
+
     triggers {
         pollSCM '* * * * *'
     }
@@ -15,11 +21,10 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+                echo "Running the Jenkins build #${env.BUILD_ID} on ${env.JENKINS_URL}"
                 sh '''
                 cd myapp
-                python3 -m venv ./venv
-                ./venv/bin/pip install -r requirements.txt
+                pip install -r requirements.txt
                 '''
             }
         }
@@ -29,8 +34,7 @@ pipeline {
                 echo 'Testing..'
                 sh '''
                 cd myapp
-                ./venv/bin/python hello.py
-                ./venv/bin/python hello.py --name=Brad
+                python hello.py --name=Brad
                 '''
             }
         }
